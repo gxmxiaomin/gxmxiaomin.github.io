@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>python进制转换，数据类型，运算符 | xiaomi♊blog</title><meta name="keywords" content="python"><meta name="author" content="小米"><meta name="copyright" content="小米"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.数据类型操作      进制:现代的计算机和依赖计算机的设备里都用到二进制(即0和1)来保存和表示数据.一个二进制表示一个比特(bit)      在二进制的基础上,计算机还支持八进制和十六进制.      除了计算机里的进制之外.我们生活中经常用到的是十进制.      Python语言支持二进制,八进制,十六进制以及十进制的数字表示.      不同进制的数字之间可以通过一定的规则进行相互">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python进制转换，数据类型，运算符">
+<meta property="og:url" content="http://example.com/2019/05/27/python%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BF%90%E7%AE%97%E7%AC%A6/index.html">
+<meta property="og:site_name" content="xiaomi♊blog">
+<meta property="og:description" content="1.数据类型操作      进制:现代的计算机和依赖计算机的设备里都用到二进制(即0和1)来保存和表示数据.一个二进制表示一个比特(bit)      在二进制的基础上,计算机还支持八进制和十六进制.      除了计算机里的进制之外.我们生活中经常用到的是十进制.      Python语言支持二进制,八进制,十六进制以及十进制的数字表示.      不同进制的数字之间可以通过一定的规则进行相互">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img1.baidu.com/it/u=1807166483,1107331951&fm=253&fmt=auto&app=138&f=JPEG?w=641&h=401">
+<meta property="article:published_time" content="2019-05-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-02T00:52:26.955Z">
+<meta property="article:author" content="小米">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img1.baidu.com/it/u=1807166483,1107331951&fm=253&fmt=auto&app=138&f=JPEG?w=641&h=401"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2019/05/27/python%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BF%90%E7%AE%97%E7%AC%A6/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'python进制转换，数据类型，运算符',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-06-02 08:52:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/portraits.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img1.baidu.com/it/u=1807166483,1107331951&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=641&amp;h=401')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">xiaomi♊blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">python进制转换，数据类型，运算符</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-05-26T16:00:00.000Z" title="发表于 2019-05-27 00:00:00">2019-05-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-02T00:52:26.955Z" title="更新于 2022-06-02 08:52:26">2022-06-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/python/">python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="python进制转换，数据类型，运算符"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>1.数据类型操作<br>      进制:现代的计算机和依赖计算机的设备里都用到二进制(即0和1)来保存和表示数据.一个二进制表示一个比特(bit)<br>      在二进制的基础上,计算机还支持八进制和十六进制.<br>      除了计算机里的进制之外.我们生活中经常用到的是十进制.<br>      Python语言支持二进制,八进制,十六进制以及十进制的数字表示.<br>      不同进制的数字之间可以通过一定的规则进行相互转换.<br>2.数据类型转换<br>      int(x,[base])   将x转换为一个整数<br>      float(x)           将x转换为一个浮点数<br>      str(x)              将对象x转换为字符串<br>      bool(x)           将对象x转成为布尔值<br>     在python中,只有空字符串’’”和数字0和空字典{}和空列表[]和空元祖()和空数据None会被转换成为False,其他的都会转换成为True<br>3.算数运算符<br>      +加法    -减法    *乘法   &#x2F;除法  &#x2F;&#x2F;取整除   %求余     **指数    ()小括号提高运算优先级<br>      注意:混合运算时,优先级顺序为: *<em>高于</em> &#x2F; %  &#x2F;&#x2F;高于 + - ,为了避免歧义,建议使用()来处理运算符优先级.并且,不同类型的数字在进行混合运算时,整数将会转换成浮点数进行运算.<br>   算数运算符在字符串里的使用<br>      .如果是两个字符串做加法运算,会直接把这两个字符串拼接成一个字符串<br>      .如果是数字和字符串做加法运算,会直接报错.<br>      .如果是数字和字符串做乘法运算,会将这个字符串重复多次.<br>4.赋值运算符<br>      基本赋值运算符  &#x3D;<br>      复合赋值运算符  +&#x3D; 加法赋值运算符   -&#x3D; 减法赋值运算符  *&#x3D; 乘法赋值运算符  &#x2F;&#x3D;除法赋值运算符  &#x2F;&#x2F;&#x3D;取整除赋值运算符  %&#x3D;取模赋值运算符  **&#x3D;幂赋值运算符<br>       注意:赋值运算符是从右往左运算,将等号右边的值赋值给等号左边,所以,等号的左边一定不能是常量,或者表达式<br>5.比较运算符<br>       &#x3D;&#x3D; 等于,比较对象是否相等<br>       !&#x3D;不等于 比较两个对象是否不相等<br>       &lt;&gt;不等于 比较两个对象是否不相等类似于!&#x3D;<br>       &gt;大于 返回x是否大于y<br>       &lt;小于 返回x是否小于y.所有比较运算符返回1表示真,返回0表示假.<br>       &gt;&#x3D; 大于等于返回x 是否大于等于y<br>       &lt;&#x3D;小于等于 返回x是否等于y<br>   字符串使用比较运算符<br>    .数字和字符串做&#x3D;&#x3D;运算结果是false 除了 &#x3D;&#x3D;以外的逻辑运算时,会直接报错.<br>    .如果是两个字符串进行比较,会将每个字符串都转换成对应的编码,然后逐一进行对比<br>6.逻辑运算符<br>  运算符    逻辑表达式   描述<br>    and     x and y      只有一个运算符是false,结果就是false;只有所有的运算符都为True时,结果才是True,做取值运算时,取第一个为false的值,如果所有的值都为True,取最后一个值.<br>   or          x or y       只要有一个值为True,结果就是True;只要所有的运算数都为False时,结果才是False做取值运算时,取第一个为True的值,如果所有的值都为False,取最后一个值.<br>   ont    ont x            布尔’非’ 如果x为True返回False.如果x为False,它返回True.<br>7.位运算符<br>       运算符        描述<br>       &amp;           按位与运算符:参与运算符的两个值,如果两个想应为都为1则该位的结果位1,否则为0<br>        |            按位或运算符:只要对应的二个二进位有一个为1时,结果位就为1<br>       ^           按位异或运算符:当两对应的二进位相异时,结果位1<br>       ~           按位取反运算符:对数据的每个二进位取反,即把1变位0,把0变位1<br>       &lt;&lt;        左移动运算符:运算数的各二进位全部左移若干位,由&lt;&lt;右边的数字制定了移动的位数,高位丢弃,低位补0<br>       &gt;&gt;        右移动运算符:把”&gt;&gt;”左边的运算数的各二进位全部右移若干位,&gt;&gt;右边的数字指定了移动的位数<br>8.运算符最高级<br>    **    指数(最高优先级)<br>    ~+- 按位翻转,一元加号和减号(最后两个的方法名为+@和-@)<br>    * &#x2F; % &#x2F;&#x2F;  乘,除,取模和取整除<br>   +-   加法减法</p>
+<blockquote>
+<blockquote>
+<p>&lt;&lt;  右移左移运算符<br>   &amp;     位’AND’<br>   ^ |    位运算符<br>   &lt;&#x3D;&lt;&gt;&gt;&#x3D;  比较运算符<br>    &lt;&gt;&#x3D;&#x3D; !&#x3D; 等于运算符<br>    &#x3D; %&#x3D; &#x2F;&#x3D; &#x2F;&#x2F;&#x3D; -&#x3D; +&#x3D; *&#x3D; **&#x3D; 赋值运算符<br>    is is not 身份运算符<br>    in not in  成员运算符<br>    not&gt;and&gt;or 逻辑运算符<br>    总结: 在以后实际开发中,如果有多种运算符进行混合运算时,强烈建议使用小括号来手动的控制运算符的优先级!</p>
+</blockquote>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">小米</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2019/05/27/python%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BF%90%E7%AE%97%E7%AC%A6/">http://example.com/2019/05/27/python%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BF%90%E7%AE%97%E7%AC%A6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">xiaomi♊blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a></div><div class="post_share"><div class="social-share" data-image="https://img1.baidu.com/it/u=1807166483,1107331951&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=641&amp;h=401" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/05/27/JavaScript%E9%9D%A2%E8%AF%95%E9%A2%98/"><img class="prev-cover" src="https://img2.baidu.com/it/u=544283419,3814727158&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=477&amp;h=307" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">javascript面试题</div></div></a></div><div class="next-post pull-right"><a href="/2019/05/27/vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/"><img class="next-cover" src="https://img2.baidu.com/it/u=1707888306,3541343375&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG?w=755&amp;h=400" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">vue响应式原理</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2019/05/25/Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/" title="数据分析"><img class="cover" src="https://img2.baidu.com/it/u=3084699896,2898485829&fm=253&fmt=auto&app=120&f=JPEG?w=650&h=366" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-05-25</div><div class="title">数据分析</div></div></a></div><div><a href="/2019/05/26/python%E5%88%97%E8%A1%A8%E7%9A%84%E5%A4%8D%E5%88%B6/" title="python列表，元祖，字典"><img class="cover" src="https://img1.baidu.com/it/u=1807166483,1107331951&fm=253&fmt=auto&app=138&f=JPEG?w=641&h=401" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-05-26</div><div class="title">python列表，元祖，字典</div></div></a></div><div><a href="/2019/05/26/python%E4%BB%8B%E7%BB%8D%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E8%AF%AD%E5%8F%A5/" title="python介绍"><img class="cover" src="https://img1.baidu.com/it/u=1807166483,1107331951&fm=253&fmt=auto&app=138&f=JPEG?w=641&h=401" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-05-26</div><div class="title">python介绍</div></div></a></div><div><a href="/2019/06/07/python%E5%B0%81%E8%A3%85%E5%87%BD%E6%95%B0/" title="python封装函数"><img class="cover" src="https://img1.baidu.com/it/u=1807166483,1107331951&fm=253&fmt=auto&app=138&f=JPEG?w=641&h=401" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-06-07</div><div class="title">python封装函数</div></div></a></div><div><a href="/2019/06/06/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" title="python文件操作"><img class="cover" src="https://img1.baidu.com/it/u=1807166483,1107331951&fm=253&fmt=auto&app=138&f=JPEG?w=641&h=401" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-06-06</div><div class="title">python文件操作</div></div></a></div><div><a href="/2019/06/06/%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%8C%85/" title="python模块与包"><img class="cover" src="https://img1.baidu.com/it/u=1807166483,1107331951&fm=253&fmt=auto&app=138&f=JPEG?w=641&h=401" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-06-06</div><div class="title">python模块与包</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/portraits.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">小米</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/05/31/Webpack%20Proxy%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F/" title="tree-shaking"><img src="https://img0.baidu.com/it/u=2523787295,1138437153&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=940&amp;h=400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="tree-shaking"/></a><div class="content"><a class="title" href="/2021/05/31/Webpack%20Proxy%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F/" title="tree-shaking">tree-shaking</a><time datetime="2021-05-30T16:00:00.000Z" title="发表于 2021-05-31 00:00:00">2021-05-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/30/tree-shaking/" title="tree-shaking"><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.mk2048.com%2Fweb_upload%2Fblog_imgs%2F8%2Fhttps___user-gold-cdn-xitu-io_2018_1_4_160bfd6b970411f3_w-720_h-405_f-jpeg_s-6737.gif&amp;refer=http%3A%2F%2Fwww.mk2048.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=auto?sec=1656414338&amp;t=f131109205e49b4ea42e423c791d32d6" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="tree-shaking"/></a><div class="content"><a class="title" href="/2021/05/30/tree-shaking/" title="tree-shaking">tree-shaking</a><time datetime="2021-05-29T16:00:00.000Z" title="发表于 2021-05-30 00:00:00">2021-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2019/06/17/http%E5%92%8Chtttps%E7%9A%84%E5%8C%BA%E5%88%AB/" title="http和htttps的区别"><img src="https://img1.baidu.com/it/u=1629306470,3187208688&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=500&amp;h=313" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="http和htttps的区别"/></a><div class="content"><a class="title" href="/2019/06/17/http%E5%92%8Chtttps%E7%9A%84%E5%8C%BA%E5%88%AB/" title="http和htttps的区别">http和htttps的区别</a><time datetime="2019-06-16T16:00:00.000Z" title="发表于 2019-06-17 00:00:00">2019-06-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2019/06/14/%E8%99%9A%E6%8B%9FDOM%E5%92%8C%E7%9C%9F%E5%AE%9EDOM%E7%9A%84%E5%8C%BA%E5%88%AB/" title="虚拟DOM和真实DOM的区别"><img src="https://img0.baidu.com/it/u=1360348353,1634007459&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPG?w=751&amp;h=422" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="虚拟DOM和真实DOM的区别"/></a><div class="content"><a class="title" href="/2019/06/14/%E8%99%9A%E6%8B%9FDOM%E5%92%8C%E7%9C%9F%E5%AE%9EDOM%E7%9A%84%E5%8C%BA%E5%88%AB/" title="虚拟DOM和真实DOM的区别">虚拟DOM和真实DOM的区别</a><time datetime="2019-06-13T16:00:00.000Z" title="发表于 2019-06-14 00:00:00">2019-06-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2019/06/10/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="react生命周期"><img src="https://img1.baidu.com/it/u=162378038,3103429100&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=450&amp;h=236" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="react生命周期"/></a><div class="content"><a class="title" href="/2019/06/10/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="react生命周期">react生命周期</a><time datetime="2019-06-09T16:00:00.000Z" title="发表于 2019-06-10 00:00:00">2019-06-10</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 小米</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

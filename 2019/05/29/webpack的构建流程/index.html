@@ -1,0 +1,204 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>webpack构建流程 | xiaomi♊blog</title><meta name="keywords" content="webpack"><meta name="author" content="小米"><meta name="copyright" content="小米"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="核心概念  entry：入口。webpack是基于模块的，使用webpack首先需要指定模块解析入口(entry)，webpack从入口开始根据模块间依赖关系递归解析和处理所有资源文件。 output：输出。源代码经过webpack处理之后的最终产物。 loader：模块转换器。本质就是一个函数，在该函数中对接收到的内容进行转换，返回转换后的结果。因为 Webpack 只认识 JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack构建流程">
+<meta property="og:url" content="http://example.com/2019/05/29/webpack%E7%9A%84%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="xiaomi♊blog">
+<meta property="og:description" content="核心概念  entry：入口。webpack是基于模块的，使用webpack首先需要指定模块解析入口(entry)，webpack从入口开始根据模块间依赖关系递归解析和处理所有资源文件。 output：输出。源代码经过webpack处理之后的最终产物。 loader：模块转换器。本质就是一个函数，在该函数中对接收到的内容进行转换，返回转换后的结果。因为 Webpack 只认识 JavaScript">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage-static.segmentfault.com%2F234%2F330%2F2343304549-5a82936208263_articlex&refer=http%3A%2F%2Fimage-static.segmentfault.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1656300751&t=c81c32b9de7a188f81aec1884d509bad">
+<meta property="article:published_time" content="2019-05-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-30T12:03:00.381Z">
+<meta property="article:author" content="小米">
+<meta property="article:tag" content="webpack">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage-static.segmentfault.com%2F234%2F330%2F2343304549-5a82936208263_articlex&refer=http%3A%2F%2Fimage-static.segmentfault.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1656300751&t=c81c32b9de7a188f81aec1884d509bad"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2019/05/29/webpack%E7%9A%84%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'webpack构建流程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-05-30 20:03:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/portraits.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage-static.segmentfault.com%2F234%2F330%2F2343304549-5a82936208263_articlex&amp;refer=http%3A%2F%2Fimage-static.segmentfault.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=auto?sec=1656300751&amp;t=c81c32b9de7a188f81aec1884d509bad')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">xiaomi♊blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">webpack构建流程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-05-28T16:00:00.000Z" title="发表于 2019-05-29 00:00:00">2019-05-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-30T12:03:00.381Z" title="更新于 2022-05-30 20:03:00">2022-05-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/webpack/">webpack</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="webpack构建流程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>核心概念</strong></p>
+<ul>
+<li><code>entry</code>：入口。webpack是基于模块的，使用webpack首先需要指定模块解析入口(entry)，webpack从入口开始根据模块间依赖关系递归解析和处理所有资源文件。</li>
+<li><code>output</code>：输出。源代码经过webpack处理之后的最终产物。</li>
+<li><code>loader</code>：模块转换器。本质就是一个函数，在该函数中对接收到的内容进行转换，返回转换后的结果。因为 Webpack 只认识 JavaScript，所以 Loader 就成了翻译官，对其他类型的资源进行转译的预处理工作。</li>
+<li><code>plugin</code>：扩展插件。基于事件流框架 <code>Tapable</code>，插件可以扩展 Webpack 的功能，在 Webpack 运行的生命周期中会广播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 Webpack 提供的 API 改变输出结果。</li>
+<li><code>module</code>：模块。除了js范畴内的<code>es module、commonJs、AMD</code>等，<code>css @import、url(...)</code>、图片、字体等在webpack中都被视为模块。</li>
+</ul>
+<p><strong>解释几个 webpack 中的术语</strong></p>
+<ul>
+<li><code>module</code>：指在模块化编程中我们把应用程序分割成的独立功能的代码模块</li>
+<li><code>chunk</code>：指模块间按照引用关系组合成的代码块，一个 <code>chunk</code> 中可以包含多个 <code>module</code></li>
+<li><code>chunk group</code>：指通过配置入口点（<code>entry point</code>）区分的块组，一个 <code>chunk group</code> 中可包含一到多个 chunk</li>
+<li><code>bundling</code>：webpack 打包的过程</li>
+<li><code>asset/bundle</code>：打包产物</li>
+</ul>
+<p><strong>webpack 的打包思想可以简化为 3 点：</strong></p>
+<ul>
+<li>一切源代码文件均可通过各种 <code>Loader</code> 转换为 JS 模块 （<code>module</code>），模块之间可以互相引用。</li>
+<li>webpack 通过入口点（<code>entry point</code>）递归处理各模块引用关系，最后输出为一个或多个产物包 <code>js(bundle)</code> 文件。</li>
+<li>每一个入口点都是一个块组（<code>chunk group</code>），在不考虑分包的情况下，一个 <code>chunk group</code> 中只有一个 <code>chunk</code>，该 chunk 包含递归分析后的所有模块。每一个 <code>chunk</code> 都有对应的一个打包后的输出文件（<code>asset/bundle</code>）</li>
+</ul>
+<p><img src="https://s.poetries.work/images/20210422211832.png" alt="img"></p>
+<p><strong>打包流程</strong></p>
+<ol>
+<li>初始化参数：从配置文件和 Shell 语句中读取并合并参数，得出最终的配置参数。</li>
+<li>开始编译：从上一步得到的参数初始化 <code>Compiler</code> 对象，加载所有配置的插件，执行对象的 <code>run</code> 方法开始执行编译。</li>
+<li>确定入口：根据配置中的 <code>entry</code> 找出所有的入口文件。</li>
+<li>编译模块：从入口文件出发，调用所有配置的 <code>loader</code> 对模块进行翻译，再找出该模块依赖的模块，这个步骤是递归执行的，直至所有入口依赖的模块文件都经过本步骤的处理。</li>
+<li>完成模块编译：经过第 4 步使用 loader 翻译完所有模块后，得到了每个模块被翻译后的最终内容以及它们之间的依赖关系。</li>
+<li>输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 <code>chunk</code>，再把每个 <code>chunk</code> 转换成一个单独的文件加入到输出列表，这一步是可以修改输出内容的最后机会。</li>
+<li>输出完成：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统。</li>
+</ol>
+<p><img src="https://s.poetries.work/images/20210517175408.png" alt="img"></p>
+<p><strong>简版</strong></p>
+<ul>
+<li>Webpack CLI 启动打包流程；</li>
+<li>载入 Webpack 核心模块，创建 <code>Compiler</code> 对象；</li>
+<li>使用 <code>Compiler</code> 对象开始编译整个项目；</li>
+<li>从入口文件开始，解析模块依赖，形成依赖关系树；</li>
+<li>递归依赖树，将每个模块交给对应的 Loader 处理；</li>
+<li>合并 Loader 处理完的结果，将打包结果输出到 dist 目录。</li>
+</ul>
+<blockquote>
+<p>在以上过程中，<code>Webpack 会在特定的时间点广播出特定的事件</code>，插件在监听到相关事件后会执行特定的逻辑，并且插件可以调用 Webpack 提供的 API 改变 Webpack 的运行结果</p>
+</blockquote>
+<p><strong>构建流程核心概念：</strong></p>
+<ul>
+<li><code>Tapable</code>：一个基于发布订阅的事件流工具类，<code>Compiler</code> 和 <code>Compilation</code> 对象都继承于 <code>Tapable</code></li>
+<li><code>Compiler</code>：compiler对象是一个全局单例，他负责把控整个webpack打包的构建流程。在编译初始化阶段被创建的全局单例，包含完整配置信息、<code>loaders</code>、plugins以及各种工具方法</li>
+<li><code>Compilation</code>：代表一次 webpack 构建和生成编译资源的的过程，在<code>watch</code>模式下每一次文件变更触发的重新编译都会生成新的 <code>Compilation</code> 对象，包含了当前编译的模块 <code>module</code>, 编译生成的资源，变化的文件, 依赖的状态等</li>
+<li>而每个模块间的依赖关系，则依赖于<code>AST</code>语法树。每个模块文件在通过Loader解析完成之后，会通过<code>acorn</code>库生成模块代码的AST语法树，通过语法树就可以分析这个模块是否还有依赖的模块，进而继续循环执行下一个模块的编译解析。</li>
+</ul>
+<p>最终<code>Webpack</code>打包出来的<code>bundle</code>文件是一个<code>IIFE</code>的执行函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack 5 打包的bundle文件内容</span></span><br><span class="line"></span><br><span class="line">(<span class="function">() =&gt;</span> &#123; <span class="comment">// webpackBootstrap</span></span><br><span class="line">    <span class="keyword">var</span> __webpack_modules__ = (&#123;</span><br><span class="line">        <span class="string">&#x27;file-A-path&#x27;</span>: (<span class="function">(<span class="params">modules</span>) =&gt;</span> &#123; <span class="comment">// ... &#125;)</span></span><br><span class="line">        <span class="string">&#x27;index-file-path&#x27;</span>: (<span class="function">(<span class="params">__unused_webpack_module, __unused_webpack_exports, __webpack_require__</span>) =&gt;</span> &#123; <span class="comment">// ... &#125;)</span></span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// The module cache</span></span><br><span class="line">    <span class="keyword">var</span> __webpack_module_cache__ = &#123;&#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// The require function</span></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">__webpack_require__</span>(<span class="params">moduleId</span>) &#123;</span><br><span class="line">        <span class="comment">// Check if module is in cache</span></span><br><span class="line">        <span class="keyword">var</span> cachedModule = __webpack_module_cache__[moduleId];</span><br><span class="line">        <span class="keyword">if</span> (cachedModule !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> cachedModule.<span class="property">exports</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Create a new module (and put it into the cache)</span></span><br><span class="line">        <span class="keyword">var</span> <span class="variable language_">module</span> = __webpack_module_cache__[moduleId] = &#123;</span><br><span class="line">                <span class="comment">// no module.id needed</span></span><br><span class="line">                <span class="comment">// no module.loaded needed</span></span><br><span class="line">                <span class="attr">exports</span>: &#123;&#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Execute the module function</span></span><br><span class="line">        __webpack_modules__[moduleId](<span class="variable language_">module</span>, <span class="variable language_">module</span>.<span class="property">exports</span>, __webpack_require__);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Return the exports of the module</span></span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">module</span>.<span class="property">exports</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// startup</span></span><br><span class="line">    <span class="comment">// Load entry module and return exports</span></span><br><span class="line">    <span class="comment">// This entry module can&#x27;t be inlined because the eval devtool is used.</span></span><br><span class="line">    <span class="keyword">var</span> __webpack_exports__ = <span class="title function_">__webpack_require__</span>(<span class="string">&quot;./src/index.js&quot;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s.poetries.work/images/20210503212144.png" alt="img"></p>
+<p><strong>webpack详细工作流程</strong></p>
+<p><img src="https://s.poetries.work/images/20210517174932.png" alt="img"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">小米</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2019/05/29/webpack%E7%9A%84%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B/">http://example.com/2019/05/29/webpack%E7%9A%84%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">xiaomi♊blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/webpack/">webpack</a></div><div class="post_share"><div class="social-share" data-image="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage-static.segmentfault.com%2F234%2F330%2F2343304549-5a82936208263_articlex&amp;refer=http%3A%2F%2Fimage-static.segmentfault.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=auto?sec=1656300751&amp;t=c81c32b9de7a188f81aec1884d509bad" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/05/30/var%20let%20const/"><img class="prev-cover" src="https://img1.baidu.com/it/u=2070606883,2137681426&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPG?w=400&amp;h=269" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">var let const区别</div></div></a></div><div class="next-post pull-right"><a href="/2019/05/27/JavaScript%E9%9D%A2%E8%AF%95%E9%A2%98/"><img class="next-cover" src="https://img2.baidu.com/it/u=544283419,3814727158&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=477&amp;h=307" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">javascript面试题</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/05/31/Webpack%20Proxy%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F/" title="tree-shaking"><img class="cover" src="https://img0.baidu.com/it/u=2523787295,1138437153&fm=253&fmt=auto&app=138&f=JPEG?w=940&h=400" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-31</div><div class="title">tree-shaking</div></div></a></div><div><a href="/2019/05/27/webpack%E6%89%93%E5%8C%85/" title="webpack打包"><img class="cover" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage-static.segmentfault.com%2F234%2F330%2F2343304549-5a82936208263_articlex&refer=http%3A%2F%2Fimage-static.segmentfault.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1656300751&t=c81c32b9de7a188f81aec1884d509bad" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-05-27</div><div class="title">webpack打包</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/portraits.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">小米</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/05/31/Webpack%20Proxy%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F/" title="tree-shaking"><img src="https://img0.baidu.com/it/u=2523787295,1138437153&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=940&amp;h=400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="tree-shaking"/></a><div class="content"><a class="title" href="/2021/05/31/Webpack%20Proxy%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F/" title="tree-shaking">tree-shaking</a><time datetime="2021-05-30T16:00:00.000Z" title="发表于 2021-05-31 00:00:00">2021-05-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/30/tree-shaking/" title="tree-shaking"><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.mk2048.com%2Fweb_upload%2Fblog_imgs%2F8%2Fhttps___user-gold-cdn-xitu-io_2018_1_4_160bfd6b970411f3_w-720_h-405_f-jpeg_s-6737.gif&amp;refer=http%3A%2F%2Fwww.mk2048.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=auto?sec=1656414338&amp;t=f131109205e49b4ea42e423c791d32d6" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="tree-shaking"/></a><div class="content"><a class="title" href="/2021/05/30/tree-shaking/" title="tree-shaking">tree-shaking</a><time datetime="2021-05-29T16:00:00.000Z" title="发表于 2021-05-30 00:00:00">2021-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2019/06/17/http%E5%92%8Chtttps%E7%9A%84%E5%8C%BA%E5%88%AB/" title="http和htttps的区别"><img src="https://img1.baidu.com/it/u=1629306470,3187208688&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=500&amp;h=313" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="http和htttps的区别"/></a><div class="content"><a class="title" href="/2019/06/17/http%E5%92%8Chtttps%E7%9A%84%E5%8C%BA%E5%88%AB/" title="http和htttps的区别">http和htttps的区别</a><time datetime="2019-06-16T16:00:00.000Z" title="发表于 2019-06-17 00:00:00">2019-06-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2019/06/14/%E8%99%9A%E6%8B%9FDOM%E5%92%8C%E7%9C%9F%E5%AE%9EDOM%E7%9A%84%E5%8C%BA%E5%88%AB/" title="虚拟DOM和真实DOM的区别"><img src="https://img0.baidu.com/it/u=1360348353,1634007459&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPG?w=751&amp;h=422" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="虚拟DOM和真实DOM的区别"/></a><div class="content"><a class="title" href="/2019/06/14/%E8%99%9A%E6%8B%9FDOM%E5%92%8C%E7%9C%9F%E5%AE%9EDOM%E7%9A%84%E5%8C%BA%E5%88%AB/" title="虚拟DOM和真实DOM的区别">虚拟DOM和真实DOM的区别</a><time datetime="2019-06-13T16:00:00.000Z" title="发表于 2019-06-14 00:00:00">2019-06-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2019/06/10/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="react生命周期"><img src="https://img1.baidu.com/it/u=162378038,3103429100&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=450&amp;h=236" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="react生命周期"/></a><div class="content"><a class="title" href="/2019/06/10/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="react生命周期">react生命周期</a><time datetime="2019-06-09T16:00:00.000Z" title="发表于 2019-06-10 00:00:00">2019-06-10</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 小米</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
