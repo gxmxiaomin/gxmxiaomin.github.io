@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>浏览器知识点二 | xiaomi♊blog</title><meta name="keywords" content="浏览器"><meta name="author" content="小米"><meta name="copyright" content="小米"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.跨域因为浏览器出于安全考虑，有同源策略。也就是说，如果协议、域名或者端口有一个不同就是跨域，Ajax请求会失败。 我们可以通过以下几种常用方法解决跨域的问题 JSONPJSONP的原理很简单，就是利用标签没有跨域限制的漏洞。通过 &#96;标签指向一个需要访问的地址并提供一个回调函数来接收数据当需要通讯时 123456&lt;script src&#x3D;&quot;http:&#x2F;&#x2F;domain&#x2F;api?par">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器知识点二">
+<meta property="og:url" content="http://example.com/2019/06/12/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9F%A5%E8%AF%86%E7%82%B9%E4%BA%8C/index.html">
+<meta property="og:site_name" content="xiaomi♊blog">
+<meta property="og:description" content="1.跨域因为浏览器出于安全考虑，有同源策略。也就是说，如果协议、域名或者端口有一个不同就是跨域，Ajax请求会失败。 我们可以通过以下几种常用方法解决跨域的问题 JSONPJSONP的原理很简单，就是利用标签没有跨域限制的漏洞。通过 &#96;标签指向一个需要访问的地址并提供一个回调函数来接收数据当需要通讯时 123456&lt;script src&#x3D;&quot;http:&#x2F;&#x2F;domain&#x2F;api?par">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img2.baidu.com/it/u=1248466127,3688642937&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500">
+<meta property="article:published_time" content="2019-06-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-12T13:09:37.434Z">
+<meta property="article:author" content="小米">
+<meta property="article:tag" content="浏览器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2.baidu.com/it/u=1248466127,3688642937&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2019/06/12/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9F%A5%E8%AF%86%E7%82%B9%E4%BA%8C/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '浏览器知识点二',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-06-12 21:09:37'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/portraits.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">45</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img2.baidu.com/it/u=1248466127,3688642937&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=667&amp;h=500')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">xiaomi♊blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">浏览器知识点二</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-06-11T16:00:00.000Z" title="发表于 2019-06-12 00:00:00">2019-06-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-12T13:09:37.434Z" title="更新于 2022-06-12 21:09:37">2022-06-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="浏览器知识点二"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h4 id="1-跨域"><a href="#1-跨域" class="headerlink" title="1.跨域"></a>1.跨域</h4><p>因为浏览器出于安全考虑，有同源策略。也就是说，如果协议、域名或者端口有一个不同就是跨域，<code>Ajax</code>请求会失败。</p>
+<p>我们可以通过以下几种常用方法解决跨域的问题</p>
+<h5 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h5><p>JSONP<code>的原理很简单，就是利用</code><script><code>标签没有跨域限制的漏洞。通过 </code><script>`标签指向一个需要访问的地址并提供一个回调函数来接收数据当需要通讯时</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://domain/api?param1=a&amp;param2=b&amp;callback=jsonp&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">jsonp</span>(<span class="params">data</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    	<span class="variable language_">console</span>.<span class="title function_">log</span>(data)</span></span><br><span class="line"><span class="language-javascript">	&#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>    </span><br></pre></td></tr></table></figure>
+
+<p><code>JSONP</code> 使用简单且兼容性不错，但是只限于 <code>get</code> 请求</p>
+<ul>
+<li>在开发中可能会遇到多个 <code>JSONP</code> 请求的回调函数名是相同的，这时候就需要自己封装一个 <code>JSONP</code>，以下是简单实现</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">jsonp</span>(<span class="params">url, jsonpCallback, success</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> script = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;script&quot;</span>);</span><br><span class="line">  script.<span class="property">src</span> = url;</span><br><span class="line">  script.<span class="property">async</span> = <span class="literal">true</span>;</span><br><span class="line">  script.<span class="property">type</span> = <span class="string">&quot;text/javascript&quot;</span>;</span><br><span class="line">  <span class="variable language_">window</span>[jsonpCallback] = <span class="keyword">function</span>(<span class="params">data</span>) &#123;</span><br><span class="line">    success &amp;&amp; <span class="title function_">success</span>(data);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(script);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">jsonp</span>(</span><br><span class="line">  <span class="string">&quot;http://xxx&quot;</span>,</span><br><span class="line">  <span class="string">&quot;callback&quot;</span>,</span><br><span class="line">  <span class="keyword">function</span>(<span class="params">value</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h5 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h5><ul>
+<li><code>ORS</code>需要浏览器和后端同时支持。<code>IE 8</code> 和 <code>9</code> 需要通过 <code>XDomainRequest</code> 来实现。</li>
+<li>浏览器会自动进行 <code>CORS</code> 通信，实现<code>CORS</code>通信的关键是后端。只要后端实现了 <code>CORS</code>，就实现了跨域。</li>
+<li>服务端设置 <code>Access-Control-Allow-Origin</code> 就可以开启 <code>CORS</code>。 该属性表示哪些域名可以访问资源，如果设置通配符则表示所有网站都可以访问资源。</li>
+</ul>
+<h5 id="document-domain"><a href="#document-domain" class="headerlink" title="document.domain"></a>document.domain</h5><ul>
+<li>该方式只能用于二级域名相同的情况下，比如 <code>a.test.com</code> 和 <code>b.test.com</code> 适用于该方式。</li>
+<li>只需要给页面添加 <code>document.domain = &#39;test.com&#39;</code> 表示二级域名都相同就可以实现跨域</li>
+</ul>
+<h5 id="postMessage"><a href="#postMessage" class="headerlink" title="postMessage"></a>postMessage</h5><p>这种方式通常用于获取嵌入页面中的第三方页面数据。一个页面发送消息，另一个页面判断来源并接收消息</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 发送消息端</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="property">parent</span>.<span class="title function_">postMessage</span>(<span class="string">&#x27;message&#x27;</span>, <span class="string">&#x27;http://test.com&#x27;</span>);</span><br><span class="line"><span class="comment">// 接收消息端</span></span><br><span class="line"><span class="keyword">var</span> mc = <span class="keyword">new</span> <span class="title class_">MessageChannel</span>();</span><br><span class="line">mc.<span class="title function_">addEventListener</span>(<span class="string">&#x27;message&#x27;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> origin = event.<span class="property">origin</span> || event.<span class="property">originalEvent</span>.<span class="property">origin</span>;</span><br><span class="line">    <span class="keyword">if</span> (origin === <span class="string">&#x27;http://test.com&#x27;</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;验证通过&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-浏览器缓存"><a href="#2-浏览器缓存" class="headerlink" title="2.浏览器缓存"></a>2.浏览器缓存</h4><p>我们经常需要对业务中的一些数据进行存储，通常可以分为 短暂性存储 和 持久性储存。</p>
+<ul>
+<li><p>短暂性的时候，我们只需要将数据存在内存中，只在运行时可用</p>
+</li>
+<li><p>持久性存储，可以分为 浏览器端 与 服务器端</p>
+<ul>
+<li><p>浏览器:</p>
+<ul>
+<li><p>cookie</p>
+<p>: 通常用于存储用户身份，登录状态等</p>
+<ul>
+<li><code>http</code> 中自动携带， 体积上限为 <code>4K</code>， 可自行设置过期时间</li>
+</ul>
+</li>
+<li><p><code>localStorage / sessionStorage</code>: 长久储存/窗口关闭删除， 体积限制为 <code>4~5M</code></p>
+</li>
+<li><p><code>indexDB</code></p>
+</li>
+</ul>
+</li>
+<li><p>服务器:</p>
+<ul>
+<li>分布式缓存 <code>redis</code></li>
+<li>数据库</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>提示：如果平常有遇到过缓存的坑或者很好的利用缓存，可以讲解一下自己的使用场景。如果没有使用注意过缓存问题你也可以尝试讲解一下和我们息息相关的Webpack构建（每一次构建静态资源名称的<code>hash</code>值都会变化），它其实就跟缓存相关</p>
+<p>缓存分为强缓存和协商缓存。强缓存不过服务器，协商缓存需要过服务器，协商缓存返回的状态码是304。两类缓存机制可以同时存在，强缓存的优先级高于协商缓存。当执行强缓存时，如若缓存命中，则直接使用缓存数据库中的数据，不再进行缓存协商。</p>
+<h4 id="3-内存泄露"><a href="#3-内存泄露" class="headerlink" title="3.内存泄露"></a>3.内存泄露</h4><ul>
+<li>意外的全局变量: 无法被回收</li>
+<li>定时器: 未被正确关闭，导致所引用的外部变量无法被释放</li>
+<li>事件监听: 没有正确销毁 (低版本浏览器可能出现)</li>
+<li>闭包: 会导致父级中的变量无法被释放</li>
+<li><code>dom</code> 引用: <code>dom</code> 元素被删除时，内存中的引用未被正确清空</li>
+</ul>
+<p>可用 <code>chrome</code> 中的 <code>timeline</code> 进行内存标记，可视化查看内存的变化情况，找出异常点。</p>
+<h4 id="4-history路由和hash路由"><a href="#4-history路由和hash路由" class="headerlink" title="4.history路由和hash路由"></a>4.history路由和hash路由</h4><p><strong>hash 路由</strong></p>
+<p>hash 路由，在 html5 前，为了解决单页路由跳转问题采用的方案， hash 的变化不会触发页面渲染，服务端也无法获取到 hash 值，前端可通过监听 hashchange 事件来处理hash值的变化</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">window.addEventListener(&#x27;hashchange&#x27;, function()&#123; </span><br><span class="line">    // 监听hash变化，点击浏览器的前进后退会触发</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>history 路由</strong></p>
+<p>history 路由，是 html5 的规范，提供了对<code>history</code>栈中内容的操作，常用api有：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">history</span>.<span class="title function_">pushState</span>(state, title, url) </span><br><span class="line"><span class="comment">// let currentState = history.state; 获取当前state</span></span><br><span class="line"><span class="comment">// state：需要保存的数据，这个数据在触发popstate事件时，可以在event.state里获取</span></span><br><span class="line"><span class="comment">// title：标题，基本没用，一般传 null</span></span><br><span class="line"><span class="comment">// url：设定新的历史记录的 url。新的 url 与当前 url 的 origin 必须是一樣的，否则会抛出错误。url可以是绝对路径，也可以是相对路径。</span></span><br><span class="line"><span class="comment">//如 当前url是 https://www.baidu.com/a/,执行history.pushState(null, null, &#x27;./qq/&#x27;)，则变成 https://www.baidu.com/a/qq/，</span></span><br><span class="line"><span class="comment">//执行history.pushState(null, null, &#x27;/qq/&#x27;)，则变成 https://www.baidu.com/qq/</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">window</span>.<span class="property">history</span>.<span class="title function_">replaceState</span>(state, title, url)</span><br><span class="line"><span class="comment">// 与 pushState 基本相同，但她是修改当前历史记录，而 pushState 是创建新的历史记录</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;popstate&quot;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 监听浏览器前进后退事件，pushState 与 replaceState 方法不会触发              </span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">小米</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2019/06/12/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9F%A5%E8%AF%86%E7%82%B9%E4%BA%8C/">http://example.com/2019/06/12/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9F%A5%E8%AF%86%E7%82%B9%E4%BA%8C/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">xiaomi♊blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></div><div class="post_share"><div class="social-share" data-image="https://img2.baidu.com/it/u=1248466127,3688642937&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=667&amp;h=500" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/06/12/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%80/"><img class="prev-cover" src="https://img2.baidu.com/it/u=1248466127,3688642937&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=667&amp;h=500" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">浏览器知识点一</div></div></a></div><div class="next-post pull-right"><a href="/2019/06/10/React%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%80/"><img class="next-cover" src="https://img1.baidu.com/it/u=162378038,3103429100&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=450&amp;h=236" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">react相关知识点</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2019/06/12/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%80/" title="浏览器知识点一"><img class="cover" src="https://img2.baidu.com/it/u=1248466127,3688642937&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-06-12</div><div class="title">浏览器知识点一</div></div></a></div><div><a href="/2019/06/05/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/" title="浏览器渲染机制"><img class="cover" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg-blog.csdnimg.cn%2F20210307092452814.png%3Fx-oss-process%3Dimage%2Fwatermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwMDYwMTE2%2Csize_16%2Ccolor_FFFFFF%2Ct_70%23pic_center&refer=http%3A%2F%2Fimg-blog.csdnimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1657021104&t=37dd0307886268b332521c3fea5325ee" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-06-05</div><div class="title">浏览器渲染机制</div></div></a></div><div><a href="/2019/06/05/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98/" title="浏览器缓存"><img class="cover" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg01.sogoucdn.com%2Fv2%2Fthumb%2Fretype%2Fext%2Fauto%2Fq%2F90%2F%3Fappid%3D200698%26name%3D614_474_20190724155501-2056139684.png&refer=http%3A%2F%2Fimg01.sogoucdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1657023650&t=1a461b9144768028e0374541691ce938" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-06-05</div><div class="title">浏览器缓存</div></div></a></div><div><a href="/2019/06/05/%E8%B7%A8%E5%9F%9F/" title="跨域"><img class="cover" src="https://t12.baidu.com/it/u=3165139216,151158844&fm=30&app=106&f=JPEG?w=598&h=300&s=B5F34B3417424553545468D5030010BA" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-06-05</div><div class="title">跨域</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/portraits.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">小米</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">45</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%B7%A8%E5%9F%9F"><span class="toc-number">1.</span> <span class="toc-text">1.跨域</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#JSONP"><span class="toc-number">1.1.</span> <span class="toc-text">JSONP</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/05/31/Webpack%20Proxy%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F/" title="tree-shaking"><img src="https://img0.baidu.com/it/u=2523787295,1138437153&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=940&amp;h=400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="tree-shaking"/></a><div class="content"><a class="title" href="/2021/05/31/Webpack%20Proxy%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F/" title="tree-shaking">tree-shaking</a><time datetime="2021-05-30T16:00:00.000Z" title="发表于 2021-05-31 00:00:00">2021-05-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/30/tree-shaking/" title="tree-shaking"><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.mk2048.com%2Fweb_upload%2Fblog_imgs%2F8%2Fhttps___user-gold-cdn-xitu-io_2018_1_4_160bfd6b970411f3_w-720_h-405_f-jpeg_s-6737.gif&amp;refer=http%3A%2F%2Fwww.mk2048.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=auto?sec=1656414338&amp;t=f131109205e49b4ea42e423c791d32d6" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="tree-shaking"/></a><div class="content"><a class="title" href="/2021/05/30/tree-shaking/" title="tree-shaking">tree-shaking</a><time datetime="2021-05-29T16:00:00.000Z" title="发表于 2021-05-30 00:00:00">2021-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2019/06/17/http%E5%92%8Chtttps%E7%9A%84%E5%8C%BA%E5%88%AB/" title="http和htttps的区别"><img src="https://img1.baidu.com/it/u=1629306470,3187208688&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=500&amp;h=313" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="http和htttps的区别"/></a><div class="content"><a class="title" href="/2019/06/17/http%E5%92%8Chtttps%E7%9A%84%E5%8C%BA%E5%88%AB/" title="http和htttps的区别">http和htttps的区别</a><time datetime="2019-06-16T16:00:00.000Z" title="发表于 2019-06-17 00:00:00">2019-06-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2019/06/14/%E8%99%9A%E6%8B%9FDOM%E5%92%8C%E7%9C%9F%E5%AE%9EDOM%E7%9A%84%E5%8C%BA%E5%88%AB/" title="虚拟DOM和真实DOM的区别"><img src="https://img0.baidu.com/it/u=1360348353,1634007459&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPG?w=751&amp;h=422" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="虚拟DOM和真实DOM的区别"/></a><div class="content"><a class="title" href="/2019/06/14/%E8%99%9A%E6%8B%9FDOM%E5%92%8C%E7%9C%9F%E5%AE%9EDOM%E7%9A%84%E5%8C%BA%E5%88%AB/" title="虚拟DOM和真实DOM的区别">虚拟DOM和真实DOM的区别</a><time datetime="2019-06-13T16:00:00.000Z" title="发表于 2019-06-14 00:00:00">2019-06-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2019/06/12/node%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%80/" title="node相关知识点"><img src="https://img0.baidu.com/it/u=2900057365,1457448233&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=1000&amp;h=500" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="node相关知识点"/></a><div class="content"><a class="title" href="/2019/06/12/node%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%80/" title="node相关知识点">node相关知识点</a><time datetime="2019-06-11T16:00:00.000Z" title="发表于 2019-06-12 00:00:00">2019-06-12</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 小米</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
