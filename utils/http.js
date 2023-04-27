@@ -7,9 +7,9 @@
 
 // export var domain = '5qtyc4.natappfree.cc'; // 杨晨natapp
 
- export const domain = 'api.muxingchen.com/api'; // 线上
+ //export const domain = 'api.muxingchen.com/api'; // 线上
 // export const domain = '192.168.0.115:8099';//调试端口
-//export var domain = '101.35.245.140/api'; // 测试服务器
+export var domain = '101.35.245.140/api'; // 测试服务器
 // export var domain = '192.168.124.7:8099' //本地测试接口--卢主管
 // export var domain = '192.168.86.12:8099' //本地测试接口--海涛
 // export var domain = '192.168.86.3:8099' //本地测试接口--大哥
