@@ -1,0 +1,582 @@
+<template>
+	<view class="page-view">
+		<view class="wrapper" :style="topBar">
+			<u-icon name="arrow-left" color="#fff" size="26" @click="back"></u-icon>
+		</view>
+		<list class="simple-video-list" @loadmore="loadMore" :loadmoreoffset="loadMoreHeight" ref="listBox"
+			:style="fullScreen" :show-scrollbar="false" :pagingEnabled="true">
+			<cell v-for="(item,i) in videoList" :key="i" :style="fullScreen">
+				<simple-video
+					v-if="Math.abs(videoKey - i) <= 1"
+					:ref-id="item.id"
+					:state="item.state"
+					:src="item.content"
+					:boxStyle="fullScreen"
+					:isFull="item.isFullScreen"
+					:remarks="item.remarks"
+					@changeFullScreen="changeFullScreen"
+				></simple-video>
+				<view class="videoHover" @click="tapVideoHover(item.state, $event)" :style="fullScreen">
+					<u-icon v-if="item.state == 'pause'" name="play-right-fill" color="#ffffff" size="36"></u-icon>
+				</view>
+				
+				<!-- 全屏的提示 -->
+				<!-- @click="videoFullScreen(item.isFullScreen)" -->
+				<view class="full-screen-tip" :style="plWidth" @click="item.isFullScreen=true"
+				 v-if="showFullTip(item.remarks)&& !item.isFullScreen">
+					<u-icon name="scan" size="18" color="#fff"></u-icon>
+					<text class="font-text">全屏</text>
+				</view>
+				
+				<!-- 右侧盒子 -->
+				<view class="item-right" @appear="videoKey = i">
+					<!-- 头像 -->
+					<view class="user-img">
+						<image class="user-heder" :src="item.headUrl"></image>
+					</view>
+					<!-- 点赞 -->
+					<view class="icon-box" @click.stop="parise(item)">
+						 <u-icon name="heart" size="28" color="#fff" v-if="!item.dian"></u-icon>
+						<u-icon name="heart-fill" v-else color="#f00" size="28"></u-icon>
+					</view>
+					<text class="icon-text"> {{item.fabulous||0}} </text>
+					<!-- 评论 -->
+					<view class="icon-box" @click="getPlList">
+						<u-icon name="more-circle" color="#fff" size="28"></u-icon>
+					</view>
+					<text class="icon-text"> {{item.comment||0}} </text>
+					<!-- 分享 -->
+					<view class="icon-box" @click="$refs.sharePopup.open()">
+						<u-icon name="share-square" color="#fff" size="28"></u-icon>
+					</view>
+					<text class="icon-text"> {{item.forward||0}} </text>
+				</view>
+				
+				<view class="item-title">
+					<text class="title-text">{{item.title}}</text>
+				</view>
+				
+			</cell>
+		</list>
+		
+		<!-- 评论弹窗 -->
+		<dialog ref="popup" type="bottom" @close="popupClose">
+			<div class="find-popup" :style="plHeight">
+				<text class="pl_num">{{videoList[videoKey].comment||0}} 条评论</text>
+				<list :style="scroolBox">
+					<!--  -->
+					<cell v-for="item in plList" :key="item.id" class="pl-cell">
+						<image :src="item.headUrl" mode="" class="user-header"></image>
+						<!-- 一级评论 -->
+						<view class="pl-info-one">
+							<text class="user-name">{{ item.userName }}</text>
+							<text class="content" @click="replayEdit(item, item)" :style="pingLunWidth">{{ item.info }}</text>
+							<text class="pl-time">{{ item.createTime.slice(0,10) }}</text>
+							<text class="load-more" v-if="!item.open&&item.child&&item.child.length > 0" @click="item.open=true">——展开更多</text>
+							<view v-if="item.open&&item.child&&item.child.length > 0">
+								<view v-for="ele in item.child" :key="ele.id" class="outher-pl-cell">
+									<image :src="ele.headUrl" class="outher-header" mode=""></image>
+									<view class="outher-pl-info">
+										<text class="user-name" v-if="ele.replyId == ele.fatherId"> {{ ele.userName }}</text>
+										<text class="user-name" v-else> {{ ele.userName }} -> {{ ele.coverName}} </text>
+										<text class="content" :style="pingLunWidthTwo" @click.stop="replayEdit(item, ele)"> {{ ele.info }} </text>
+										<text class="pl-time"> {{ item.createTime.slice(0,10) }} </text>
+									</view>
+								</view>
+								<text class="load-more" v-if="item.open" @click="item.open=false">——收起</text>
+							</view>
+							
+						</view>
+					</cell>
+				</list>
+				<div class="footer-box" :style="plWidth+'bottom:'+ boardHeight+'px;'">
+					<u--input :placeholder="placeholder ==''? '我来讲两句':placeholder"
+					 border="surround" v-model="value" @confirm="sendPl" adjust-position="false"></u--input>
+				</div>
+			</div>
+		</dialog>
+		
+		<!-- 分享的弹窗 -->
+		<dialog ref="sharePopup" type="bottom">
+			<view class="share-popup" :style="plWidth">
+				<view class="share-title">分享至</view>
+				<view class="share-list">
+					<view class="share-cell" @click.stop="share('weixin','WXSceneSession')">
+						<image :src="require('@/static/images/informationdetails1.png')" mode="" class="share-img"></image>
+						<text class="share-name">微信</text>
+					</view>
+					<view class="share-cell" @click.stop="shareQQ('')">
+						<image :src="require('@/static/images/informationdetails3.png')" mode="" class="share-img"></image>
+						<text class="share-name">QQ</text>
+					</view>
+					<view class="share-cell" @click.stop="share('weixin','WXSceneTimeline')">
+						<image :src="require('@/static/images/informationdetails4.png')" mode="" class="share-img"></image>
+						<text class="share-name">朋友圈</text>
+					</view>
+					<view class="share-cell" @click.stop="share('sinaweibo')">
+						<image :src="require('@/static/images/informationdetails2.png')" mode="" class="share-img"></image>
+						<text class="share-name">微博</text>
+					</view>
+				</view>
+			</view>
+		</dialog>
+		
+	</view>
+</template>
+
+<script>
+	var deviceInfo = uni.getSystemInfoSync();
+	import simpleVideo from '@/components/simple-video/simple-video.nvue';
+	import dialog from '@/components/uni-popup/uni-popup.vue';
+	import { http } from '@/utils/http.js'
+	import allShareUrl from '@/utils/shareUrl.js'
+	export default {
+		components:{ simpleVideo,dialog },
+		data() {
+			return {
+				id: '',
+				videoList: [],
+				videoKey: 0,
+				loadMoreHeight: deviceInfo.windowHeight * 2,
+				value: '',
+				plList:[],
+				boxStyle: {
+					width: deviceInfo.screenWidth + 'px',
+					height: deviceInfo.windowHeight + 'px'
+				},
+				// 被回复的对象
+				replayForm: {},
+				// 当前评论的一级评论
+				parentForm: {},
+				// 评论的默认提示
+				placeholder:'',
+				// 键盘的高度
+				boardHeight: 0,
+			};
+		},
+		computed:{
+			topBar() { //顶部弹窗
+				let height = deviceInfo.statusBarHeight + 44
+				let width = deviceInfo.screenWidth
+				return "height:" + height +'px;width:' + width + 'px;padding-top:' + deviceInfo.statusBarHeight +'px'
+			},
+			fullScreen(){ //全屏
+				let height = deviceInfo.screenHeight
+				let width = deviceInfo.screenWidth
+				return "height:" + height + 'px;width:' + width +'px;'
+			},
+			plHeight() { // 评论弹框的高度
+				let height = deviceInfo.screenHeight * 0.7
+				let width = deviceInfo.screenWidth
+				return "height:" + height + 'px;width:' + width +'px;'
+			},
+			scroolBox() { //弹框中评论的高度
+				let height = deviceInfo.screenHeight * 0.7 - 20 - 44
+				let width = deviceInfo.screenWidth
+				return "height:" + height + 'px;width:' + width +'px;'
+			},
+			plWidth() { //满屏的宽度
+				let width = deviceInfo.screenWidth
+				return 'width:' + width + 'px;'
+			},
+			pingLunWidth() { //一级评论的宽度
+				let width = deviceInfo.screenWidth - 55
+				return 'width:' + width + 'px;'
+			},
+			pingLunWidthTwo() { //二级评论的宽度
+				let width = deviceInfo.screenWidth - 92
+				return 'width:' + width + 'px;'
+			},
+		},
+		watch: {
+			videoKey(videoKey, old_k) { // 当前展示的对象
+				console.log(videoKey);
+				this.videoList[videoKey].state = 'play';
+				this.videoList[old_k].state = 'stop';
+			}
+		},
+		onLoad(options) {
+			this.id = options.id
+			this.targetId = options.targetId
+			this.getVidoList(()=>{
+				this.$nextTick(() => {
+					this.videoList[0].state = 'play';
+				});
+			})
+			this.getPlList(false)
+			
+			uni.onKeyboardHeightChange((res)=>{
+				this.boardHeight=res.height
+			})
+		},
+		methods:{
+			
+			back() {
+				uni.navigateBack()
+			},
+			
+			getVidoList(callback = e => {}) { //获取视频列表
+				http.post('/app/School/selectByIds',{
+					id: this.id,
+					targetId: this.targetId
+				}).then(res=>{
+					console.log("获取到的数据", res)
+					let arr = [ res.data ]
+					arr.forEach(ele => {
+						this.videoList.push(Object.assign(ele, { state: 'pause', isFullScreen: false }));
+					})
+					callback && callback();
+				})
+				
+			},
+			
+			changeArr(arr) { // 改变数组
+				return arr.map(ele=>{
+					if(ele.muSchoolDiscusses&&Array.isArray(ele.muSchoolDiscusses)) ele.child = this.changeArr(ele.muSchoolDiscusses)
+					return {...ele}
+				})
+			},
+			
+			getPlList(open=true) { // 获取评论列表
+				http.post('/app/School/getMuSchoolArticleList',{
+					articleId: this.id
+				}).then(res=>{
+					this.plList = this.changeArr(res.data)
+					console.log("获取到的评论结果", res)
+					if(open) this.$refs.popup.open()
+				})
+			},
+			
+			tapVideoHover(state, ev) { //改变播放状态
+				console.log(state)
+				if (state == 'play' || state == 'continue') {
+					this.videoList[this.videoKey].state = 'pause';
+				} else {
+					this.videoList[this.videoKey].state = 'continue';
+				}
+			},
+			
+			videoFullScreen(isFullScreen) { //视频铺满全屏
+				this.videoList[this.videoKey].isFullScreen = !this.videoList[this.videoKey].isFullScreen
+			},
+			
+			changeFullScreen(detial) { //全屏改变
+				console.log("改变铺满的状态", detial)
+				this.videoList[this.videoKey].isFullScreen = detial.fullScreen
+			},
+			
+			replayEdit( item, replay ) { //回复的编辑
+				console.log("要回复的对象", replay)
+				this.placeholder = '@' + replay.userName
+				this.replayForm = replay
+				this.parentForm = item
+			},
+			
+			sendPl() {
+				console.log("发送的评论是", this.value)
+				let data = {
+					info: this.value,
+					articleId: this.id,
+					fatherId: this.parentForm.id||0,
+					replyId: this.replayForm.id||0,
+				}
+				if(this.replayForm.userName) {
+					data.coverName = this.replayForm.userName
+				}
+				
+				http.postJson('/app/School/addDiscussService', data).then(ele=>{
+					this.videoList[this.videoKey].comment = (this.videoList[this.videoKey].comment||0)+1
+					this.getPlList()
+					this.value = ''
+					this.placeholder = ''
+					this.replayForm = {}
+					this.parentForm = {}
+				})
+			},
+			
+			parise(item) {
+				http.get('/app/School/vote',{ id:this.id }).then(res=>{
+					if(res.msg == '点赞成功') {
+						item.dian = true
+						item.fabulous = (item.fabulous||0) + 1
+					} else {
+						item.dian = false
+						item.fabulous = (item.fabulous||1) - 1
+					}
+				})
+			},
+			
+			popupClose() {
+				this.value = ''
+				this.placeholder = ''
+				this.replayForm = {}
+				this.parentForm = {}
+			},
+			
+			loadMore(e) {
+				console.log('loadMore');
+			},
+			
+			showFullTip(remarks) { //是否显示全屏的提示
+				if(!remarks) return false
+				let obj = JSON.parse(remarks)
+				console.log(obj)
+				return (obj.height <= obj.width)
+			},
+			
+			// 图文只能分享到微信和微博
+			share( provider='sinaweibo' ,scene='') {
+				console.log("分享的结果为", provider, scene)
+				let details = this.videoList[this.videoKey]
+				let img = details.videoCover||''
+				if(img == '') img = 'https://img0.baidu.com/it/u=2725915437,1236608227&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500'
+				else img = img.split(',')[0]
+				uni.share({
+					provider: provider,
+					scene: scene,
+					type: 0,
+					title: details.title,
+					imageUrl: img,
+					href: allShareUrl.videoShareUrl({
+						id: this.id,
+						targetId: this.targetId
+					}),
+					success: (res) => {
+						console.log("success:" + JSON.stringify(res));
+						this.shareConfirm()
+					},
+					fail: (err)=> {
+						console.log("fail:" + JSON.stringify(err));
+					}
+				});
+			},
+			
+			// qq分享文字
+			shareQQ(){
+				let details = this.videoList[this.videoKey]
+				let img = details.videoCover||''
+				if(img == '') img = 'https://img0.baidu.com/it/u=2725915437,1236608227&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500'
+				else img = img.split(',')[0]
+				uni.share({
+					provider: 'qq',
+					type: 1,
+					title: details.title,
+					summary: details.title,
+					imageUrl: img,
+					href: allShareUrl.videoShareUrl({
+						id: this.id,
+						targetId: this.targetId
+					}),
+					success: (res)=> {
+						console.log("success:" + JSON.stringify(res));
+						this.shareCallback()
+					},
+					fail: (err)=> {
+						console.log("fail:" + JSON.stringify(err));
+					}
+				});
+			},
+			
+			shareCallback(){ // 分享之后的回调
+				http.post('/app/School/insertForum', {id:this.details.id}).then(res=>{
+					console.log("分享次数增加的结果为", res)
+					this.videoList[this.videoKey].forward = (this.videoList[this.videoKey].forward||0) + 1
+				})
+			},
+		},
+
+	}
+</script>
+
+<style lang="scss" scoped>
+.page-view {
+	flex: 1;
+	.wrapper {
+		position: fixed;
+		top: 0;
+		height: 0;
+		padding: 0 30rpx;
+	}
+}
+
+.simple-video-list {
+	flex: 1;
+}
+
+.videoHover {
+	position: absolute;
+	top: 0;
+	left: 0;
+	flex: 1;
+	background-color: rgba(0, 0, 0, 0.1);
+	justify-content: center;
+	align-items: center;
+}
+
+.item-right {
+	position: absolute;
+	right: 32rpx;
+	bottom: 200rpx;
+	text-align: center;
+	.user-img {
+		width: 80rpx;
+		height: 80rpx;
+		margin-bottom: 40rpx;
+		position: relative;
+		.user-heder {
+			width: 80rpx;
+			height: 80rpx;
+			border-radius: 50%;
+		}
+	}
+	
+	.icon-box {
+		width: 80rpx;
+		align-items: center;
+		margin-bottom: 10rpx;
+	}
+	
+	.icon-text {
+		color: #fff;
+		font-size: 26rpx;
+		text-align: center;
+		margin-bottom: 30rpx;
+	}
+}
+
+.item-title {
+	position: absolute;
+	left: 30rpx;
+	bottom: 100rpx;
+	.title-text {
+		width: 400rpx;
+		line-height: 36rpx;
+		color: #fff;
+		font-size: 26rpx;
+	}
+}
+
+
+.find-popup {
+	background-color: #fff;
+	padding: 5px 0;
+	flex: 1;
+	.pl_num {
+		text-align: center;
+		font-size: 24rpx;
+		height: 15px;
+	}
+}
+// 	background-color: #ff0;
+.pl-cell {
+	padding: 0 30rpx;
+	position: relative;
+	.user-header {
+		width: 70rpx;
+		height: 70rpx;
+		border-radius: 50%;
+		position: absolute;
+	}
+	.pl-info-one {
+		left: 80rpx;
+		padding-top: 20rpx;
+		.user-name {
+			font-size: 24rpx;
+			line-height: 30rpx;
+			color: #333333;
+		}
+		.content {
+			margin-top: 10rpx;
+			font-size: 26rpx;
+			color: #515151;
+			line-height: 32rpx;
+		}
+		.pl-time {
+			margin-left: 10rpx;
+			margin-top: 10rpx;
+			margin-bottom: 10rpx;
+			font-size: 20rpx;
+			line-height: 25rpx;
+			color: #555555;
+		}
+		.load-more {
+			// margin-top: 10rpx;
+			font-size: 22rpx;
+			line-height: 25rpx;
+			color: #666666;
+		}
+	}
+
+}
+
+.outher-pl-cell {
+	position: relative;
+	.outher-header {
+		width: 50rpx;
+		height: 50rpx;
+		border-radius: 50%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	.outher-pl-info {
+		left: 60rpx;
+		padding-top: 20rpx;
+	}
+}
+
+.footer-box {
+	height: 44px;
+	position: fixed;
+	padding: 5rpx 20rpx;
+	bottom: 0;
+	left: 0;
+	z-index: 999999999;
+	background-color: #fff;
+}
+
+.share-popup {
+	height: 300rpx;
+	background-color: #fff;
+	padding: 50rpx 30rpx;
+	.share-title {
+		line-height: 50rpx;
+		font-size: 32rpx;
+		font-weight: bold;
+	}
+	.share-list {
+		margin-top: 30rpx;
+		flex-direction: row;
+		justify-content: space-around;
+		.share-cell {
+			flex-direction: column;
+			.share-img {
+				width: 60rpx;
+				height: 60rpx;
+			}
+			.share-name {
+				margin-top: 20rpx;
+				font-size: 26rpx;
+				color: #515151;
+				text-align: center;
+			}
+		}
+	}
+}
+
+.full-screen-tip {
+	position: absolute;
+	bottom: 200rpx;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	font-size: 24rpx;
+	.font-text {
+		font-size: 24rpx;
+		color: #fff;
+		margin-left: 20rpx;
+	}
+}
+
+</style>

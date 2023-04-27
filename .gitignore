@@ -1,0 +1,6 @@
+/.DS_Store
+/.hbuilderx
+node_modules/
+package-lock.json
+unpackage/
+!unpackage/res/

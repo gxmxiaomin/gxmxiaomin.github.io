@@ -1,0 +1,102 @@
+<template>
+	<view class="view-wrapper">
+		<view class="view-share">
+			<text class="view-title">— 分享至 —</text>
+			<view class="view-locat">
+				<view class="view-item">
+					<image class="image" src="../../../static/images/weixin-2.png"></image>
+					<text class="text-name">微信</text>
+				</view>
+				<view class="view-item">
+					<image class="image" src="../../../static/images/pengyouquan.png"></image>
+					<text class="text-name">朋友圈</text>
+				</view>
+				<view class="view-item">
+					<image class="image" src="../../../static/images/weibo.png"></image>
+					<text class="text-name">微博</text>
+				</view>
+				<view class="view-item">
+					<image class="image" src="../../../static/images/qq.png"></image>
+					<text class="text-name">QQ</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+
+			}
+		},
+		methods: {
+
+		}
+	}
+</script>
+
+<style lang="scss">
+	.u-slide-down-enter-active{
+		bottom: 0!important;
+	}
+	.view-wrapper{
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+
+	.view-share {
+		border-radius: 20rpx 20rpx 0rpx 0rpx;
+		background-color: #FFFFFF;
+		width: 750rpx;
+		height: 409rpx;
+		padding: 45rpx;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.view-title {
+		text-align: center;
+	}
+
+	.view-locat {
+		width: 750rpx;
+		flex-direction: row;
+		align-items: center;
+		margin-top: 86rpx;
+	}
+	
+	.image{
+		width: 87rpx;
+		height: 87rpx;
+	}
+	
+	.text-name{
+		font-size: 28rpx;
+		font-weight: 400;
+		color: #333333;
+		margin-top: 14rpx;
+	}
+
+	.view-item {
+		flex: 1;
+		flex-direction: column;
+		align-items: center;
+
+		// &:first-child {
+		// 	margin-left: 0rpx;
+		// }
+
+		// image {
+		// 	width: 86rpx;
+		// 	height: 86rpx;
+		// }
+
+		// view {
+		// 	font-size: 28rpx;
+		// 	font-weight: 400;
+		// 	color: #333333;
+		// }
+	}
+</style>

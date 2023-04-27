@@ -1,0 +1,97 @@
+<template>
+	<view>
+		<view class="view-bottom">
+			<view class="view-item" @click="collect">
+				<image class="image"
+					:src="collects==true?'../../../static/images/collect2.png':'../../../static/images/shoucang.png'">
+				</image>
+				<text class="text-collect">收藏</text>
+			</view>
+			<view class="view-item" @click="share">
+				<image class="image" src="../../../static/images/fenxiang.png"></image>
+				<text class="text-collect">分享</text>
+			</view>
+			<view class="view-item-last" @click="to">
+				<text class="text-pay">缴纳学费</text>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				collects: false,
+			}
+		},
+		onLoad() {
+			uni.$on("collectResult", (res) => {
+				console.log("父组件传给子组件", res);
+				this.collects = res
+			});
+		},
+		methods: {
+			to() {
+				uni.$emit('toStudentMessage', 1);
+			},
+			share() {
+				uni.$emit('showShare');
+			},
+			collect() {
+				uni.$emit("collect");
+			}
+		},
+		created() {}
+	}
+</script>
+
+<style lang="scss" scoped>
+	.view-bottom {
+		width: 750rpx;
+		height: 98rpx;
+		flex-direction: row;
+		background-color: #FFFFFF;
+		z-index: 999;
+		align-items: center;
+		padding: 0rpx 30rpx;
+
+	}
+
+	.text-pay {
+		font-size: 32rpx;
+		font-weight: 500;
+		color: #FFFFFF;
+	}
+
+	.view-item {
+		padding: 14rpx;
+		align-items: center;
+		flex-direction: column;
+	}
+
+	.view-item-last {
+		width: 450rpx;
+		height: 70rpx;
+		padding: 14rpx;
+		background: #4A9AFF;
+		box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(19, 98, 198, 0.43);
+		border-radius: 40rpx;
+		margin-left: 45rpx;
+		align-items: center;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.image {
+		width: 43rpx;
+		height: 43rpx;
+	}
+
+	.text-collect {
+		font-size: 24rpx;
+		font-weight: 400;
+		color: #333333;
+		text-align: center;
+	}
+</style>

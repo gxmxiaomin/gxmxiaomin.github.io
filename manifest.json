@@ -1,0 +1,244 @@
+{
+    "name" : "沐星辰",
+    "appid" : "__UNI__8F10453", //uni.UNI419986E
+    "description" : "",
+    "versionName" : "1.2.35",
+    "versionCode" : 1235,
+    "transformPx" : false,
+    /* 5+App特有相关 */
+    "app-plus" : {
+        "usingComponents" : true,
+        "nvueStyleCompiler" : "uni-app",
+        "compilerVersion" : 3,
+        "compatible" : {
+            "ignoreVersion" : true //true表示忽略版本检查提示框，HBuilderX1.9.0及以上版本支持
+        },
+        "splashscreen" : {
+            "alwaysShowBeforeRender" : false,
+            "waiting" : false,
+            "autoclose" : true,
+            "delay" : 0
+        },
+        /* 模块配置 */
+        "modules" : {
+            "VideoPlayer" : {},
+            "Geolocation" : {},
+            "Share" : {},
+            "OAuth" : {},
+            "Payment" : {},
+            "Maps" : {},
+            "Camera" : {}
+        },
+        /* 应用发布信息 */
+        "distribute" : {
+            /* android打包配置 */
+            "android" : {
+                "permissions" : [
+                    "<uses-feature android:name=\"android.hardware.camera\"/>",
+                    "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_MOCK_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CAMERA\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+                    "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+                    "<uses-permission android:name=\"android.permission.INTERNET\"/>",
+                    "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
+                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
+                ],
+                "abiFilters" : [ "armeabi-v7a", "arm64-v8a", "x86" ],
+                "custompermissions" : "true",
+                "permissionExternalStorage" : {
+                    "request" : "none"
+                },
+                "permissionPhoneState" : {
+                    "request" : "none"
+                }
+            },
+            /* ios打包配置 */
+            "ios" : {
+                "privacyDescription" : {
+                    "NSPhotoLibraryUsageDescription" : "开启后您可以使用扫一扫、头像设置、客服、评论或分享、图像识别等服务",
+                    "NSCameraUsageDescription" : "开启后您可以使用扫一扫、头像设置、客服、评论或分享、图像识别等服务",
+                    "NSPhotoLibraryAddUsageDescription" : "开启后您可以使用扫一扫、头像设置、客服、评论或分享、图像识别等服务",
+                    "NSMicrophoneUsageDescription" : "开启后您可以使用客服等服务",
+                    "NSLocationWhenInUseUsageDescription" : "开启后您可以查看所在城市、学校位置信息等服务",
+                    "NSLocationAlwaysUsageDescription" : "开启后您可以查看所在城市、学校位置信息等服务",
+                    "NSLocationAlwaysAndWhenInUseUsageDescription" : "开启后您可以查看所在城市、学校位置信息等服务",
+                    "NSUserTrackingUsageDescription" : "请您放心，该权限无法获取您在其他网站或应用的隐私信息，我们申请权限用于标识设备以为您推荐优质内容"
+                },
+                "dSYMs" : false
+            },
+            /* SDK配置 */
+            "sdkConfigs" : {
+                "ad" : {},
+                "geolocation" : {
+                    "amap" : {
+                        "__platform__" : [ "ios", "android" ],
+                        "appkey_ios" : "51aa6e7a59a3c8cc3b895feccba78af2",
+                        "appkey_android" : "0c7a6d26395dec3f4ff14a56c2681b32"
+                    }
+                },
+                "payment" : {
+                    "alipay" : {
+                        "__platform__" : [ "ios", "android" ]
+                    },
+                    "weixin" : {
+                        "__platform__" : [ "ios", "android" ],
+                        "appid" : "wxe9583deff3533e60",
+                        "UniversalLinks" : "https://com.muxingchen.yunzan/app/"
+                    }
+                },
+                "oauth" : {
+                    "weixin" : {
+                        "appid" : "wxe9583deff3533e60",
+                        "appsecret" : "91bb1b08ed49959c82c578e412b3111b",
+                        "UniversalLinks" : "https://com.muxingchen.yunzan/app/"
+                    },
+                    "qq" : {
+                        "appid" : "101991955",
+                        "UniversalLinks" : "https://com.muxingchen.yunzan/app/"
+                    }
+                },
+                "share" : {
+                    "weixin" : {
+                        "appid" : "wxe9583deff3533e60",
+                        "UniversalLinks" : "https://com.muxingchen.yunzan/app/"
+                    },
+                    "qq" : {
+                        "appid" : "101991955",
+                        "UniversalLinks" : "https://com.muxingchen.yunzan/app/"
+                    }
+                },
+                "speech" : {},
+                "maps" : {
+                    "amap" : {
+                        "appkey_ios" : "51aa6e7a59a3c8cc3b895feccba78af2",
+                        "appkey_android" : "0c7a6d26395dec3f4ff14a56c2681b32"
+                    }
+                },
+                "push" : {}
+            },
+            "icons" : {
+                "android" : {
+                    "hdpi" : "unpackage/res/icons/72x72.png",
+                    "xhdpi" : "unpackage/res/icons/96x96.png",
+                    "xxhdpi" : "unpackage/res/icons/144x144.png",
+                    "xxxhdpi" : "unpackage/res/icons/192x192.png"
+                },
+                "ios" : {
+                    "appstore" : "unpackage/res/icons/1024x1024.png",
+                    "ipad" : {
+                        "app" : "unpackage/res/icons/76x76.png",
+                        "app@2x" : "unpackage/res/icons/152x152.png",
+                        "notification" : "unpackage/res/icons/20x20.png",
+                        "notification@2x" : "unpackage/res/icons/40x40.png",
+                        "proapp@2x" : "unpackage/res/icons/167x167.png",
+                        "settings" : "unpackage/res/icons/29x29.png",
+                        "settings@2x" : "unpackage/res/icons/58x58.png",
+                        "spotlight" : "unpackage/res/icons/40x40.png",
+                        "spotlight@2x" : "unpackage/res/icons/80x80.png"
+                    },
+                    "iphone" : {
+                        "app@2x" : "unpackage/res/icons/120x120.png",
+                        "app@3x" : "unpackage/res/icons/180x180.png",
+                        "notification@2x" : "unpackage/res/icons/40x40.png",
+                        "notification@3x" : "unpackage/res/icons/60x60.png",
+                        "settings@2x" : "unpackage/res/icons/58x58.png",
+                        "settings@3x" : "unpackage/res/icons/87x87.png",
+                        "spotlight@2x" : "unpackage/res/icons/80x80.png",
+                        "spotlight@3x" : "unpackage/res/icons/120x120.png"
+                    }
+                }
+            },
+            "splashscreen" : {
+                "useOriginalMsgbox" : true
+            }
+        },
+        "nativePlugins" : {
+            "Yunzan-FilePicker" : {
+                "__plugin_info__" : {
+                    "name" : "文件选择",
+                    "description" : "文件选择",
+                    "platforms" : "Android",
+                    "url" : "",
+                    "android_package_name" : "",
+                    "ios_bundle_id" : "",
+                    "isCloud" : false,
+                    "bought" : -1,
+                    "pid" : "",
+                    "parameters" : {}
+                }
+            }
+        }
+    },
+    /* 快应用特有相关 */
+    "quickapp" : {},
+    "h5" : {
+        "devServer" : {
+            "proxy" : {
+                "/dpc" : {
+                    "target" : "http://api.muxingchen.com/api",
+                    "changeOrigin" : true,
+                    "pathRewrite" : {
+                        "^/dpc" : ""
+                    }
+                }
+            },
+            // 跳过主机检测
+            "disableHostCheck" : true,
+            "https" : false
+        },
+        "router" : {
+            "mode" : "hash",
+            "base" : "./"
+        },
+        "title" : "沐星辰",
+        "sdkConfigs" : {
+            "maps" : {
+                "amap" : {
+                    "key" : "e74c5dc07f495a30a6a8f92e4acc5d49",
+                    "securityJsCode" : "8576fdc26f9c2a556b264ebe9e2d682a",
+                    "serviceHost" : "h5.muxingchen.com"
+                }
+            }
+        },
+        "optimization" : {
+            "treeShaking" : {
+                "enable" : true
+            }
+        }
+    },
+    /* 小程序特有相关 */
+    "mp-weixin" : {
+        "appid" : "wxeb3bda3e7c98e3f3",
+        "setting" : {
+            "urlCheck" : false
+        },
+        "usingComponents" : true
+    },
+    "mp-alipay" : {
+        "usingComponents" : true
+    },
+    "mp-baidu" : {
+        "usingComponents" : true
+    },
+    "mp-toutiao" : {
+        "usingComponents" : true
+    },
+    "uniStatistics" : {
+        "enable" : false
+    },
+    "vueVersion" : "2"
+}

@@ -1,0 +1,129 @@
+<template>
+	<view class="simple-video">
+		<!-- <video
+			v-if="refId != ''"
+			:ref="`video_${refId}`"
+			:id="`video_${refId}`"
+			:src="src"
+			@play="playIng"
+			:loop="true"
+			:enable-progress-gesture="false"
+			:page-gesture="false"
+			:initial-time="15"
+			:controls="false"
+			:show-fullscreen-btn="false"
+			:show-center-play-btn="false"
+			class="video"
+			:style="boxStyle"
+			@ended="endedPlay"
+		></video> -->
+		<video 
+		v-if="refId!=''"
+		:ref="`video_${refId}`"
+		:src="src"
+		:loop="true"
+		:style="boxStyle"
+		@fullscreenchange="fullscreenchange"
+		 ></video>
+	</view>
+</template>
+
+<script>
+export default {
+	watch: {
+		state(newValue, oldValue) {
+			// var  videoCtx = uni.createVideoContext(`video_${this.refId}`, this);
+			var videoCtx = this.$refs[`video_${this.refId}`];
+			console.log(videoCtx)
+			switch (newValue) {
+				case 'play':
+					videoCtx.play();
+					break;
+				case 'continue':
+					videoCtx.play();
+					break;
+				case 'pause':
+					videoCtx.pause();
+					break;
+				case 'stop':
+					videoCtx.pause();
+					break;
+				default:
+					break;
+			}
+		},
+		isFull(nv,ov) {
+			var videoCtx = this.$refs[`video_${this.refId}`];
+			let obj = {}
+			if(this.remarks != "") {
+				obj = JSON.parse(this.remarks)
+			}
+			if(nv && obj.height <= obj.width) {
+				videoCtx.requestFullScreen()
+			}
+		}
+	},
+	props: {
+		state: {
+			type: Boolean,
+			default() {
+				return false;
+			}
+		},
+		src: {
+			type: String,
+			default() {
+				return '';
+			}
+		},
+		boxStyle: {
+			type: Object,
+			default() {
+				return {};
+			}
+		},
+		refId: {
+			type: String,
+			default() {
+				return '';
+			}
+		},
+		isFull: {
+			type: Boolean,
+			default() {
+				return false;
+			}
+		},
+		
+		remarks:{ //备注
+			type: String,
+			default() {
+				return "";
+			}
+		}
+	},
+
+	methods: {
+		endedPlay(e) {
+			this.$emit('ended', e);
+		},
+		fullscreenchange({detail}) {
+			console.log("e", detail)
+			this.$emit('changeFullScreen', detail)
+		}
+	}
+};
+</script>
+
+<style>
+.simple-video {
+	background-color: #000000;
+	position: relative;
+	flex: 1;
+}
+
+.video {
+	width: 750rpx;
+	flex: 1;
+}
+</style>
