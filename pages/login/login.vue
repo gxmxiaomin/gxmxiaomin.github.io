@@ -440,11 +440,13 @@
 
 <style lang="scss" scoped>
 	.view-phone {
-		position: fixed;
-		bottom: 60rpx;
+		// position: fixed;
+		// bottom: 60rpx;
+		// font-size: 24rpx;
+		// color: #999999;
+		margin-top: 80% !important;
 		font-size: 24rpx;
 		color: #999999;
-
 		// text {
 		// 	margin-left: 10rpx;
 		// 	color: #4B9AFF;
