@@ -2,8 +2,8 @@
     "name" : "沐星辰",
     "appid" : "__UNI__8F10453", //uni.UNI419986E
     "description" : "",
-    "versionName" : "1.2.35",
-    "versionCode" : 1235,
+    "versionName" : "1.3.00",
+    "versionCode" : 1300,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {

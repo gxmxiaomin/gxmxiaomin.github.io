@@ -32,7 +32,7 @@
 			</view>
 			<!-- 购买两和浏览量数据 -->
 			<view class="list1" v-if="look">
-				<!-- <view class="user1">
+				<view class="user1">
 					<view class="user-item1" v-for="item of info.adUserVo.userList">
 						<view class="imgs1">
 							<u--image :src="item.userImg?item.userImg:defaultImg" width="40px" height="40px" shape="circle"></u--image>
@@ -41,10 +41,10 @@
 							<text >{{ item.userName }}</text>
 						</view>
 					</view>
-				</view> -->
+				</view>
 			</view>
 			<view class="list" v-else>
-				<!-- <view class="user">
+				<view class="user">
 					<view class="user-item" v-for="item of info.adUserVo.userList">
 						<view class="imgs">
 							<u--image :src="item.userImg?item.userImg:defaultImg" width="40px" height="40px" shape="circle"></u--image>
@@ -69,7 +69,7 @@
 							<text >{{ item.userName }}</text>
 						</view>
 					</view>
-				</view> -->
+				</view>
 			</view>
 			
 		</view>
