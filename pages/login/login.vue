@@ -78,7 +78,7 @@
 		<view class="view-phone">
 			<view class="view-check">
 				<u-checkbox-group v-model="checkboxValue1" placement="column" @change="checkboxChange">
-					<u-checkbox :customStyle="{marginBottom: '8rpx'}" v-for="(item, index) in checkboxList1"
+					<u-checkbox :customStyle="{marginBottom: '8rpx'}" :checked = 'true' v-for="(item, index) in checkboxList1"
 						:key="index" :label="item.name" :name="item.name">
 					</u-checkbox>
 				</u-checkbox-group>
@@ -202,7 +202,7 @@
 				});
 			},
 			checkboxChange(n) {
-				console.log(n.length);
+				console.log(n);
 				this.checkBox = n.length
 			},
 			// 登录
@@ -234,12 +234,12 @@
 					this.signText = '登录'
 					return;
 				}
-				if (this.checkBox != 1) {
-					this.$toast("请勾选隐私协议");
-					this.loading = false
-					this.signText = '登录'
-					return;
-				}
+				// if (this.checkBox = 1) {
+				// 	this.$toast("请勾选隐私协议");
+				// 	this.loading = false
+				// 	this.signText = '登录'
+				// 	return;
+				// }
 				let res = await this.http.postJson('/app/user/appLogin', {
 					username: this.phone,
 					password: this.newPassword,
@@ -250,6 +250,7 @@
 				console.log(res);
 				if (res.code == 200) {
 					uni.setStorageSync("token", res.data.token);
+					
 					// jia 增加 用来获取 微信是否绑定
 					// uni.setStorageSync("isw", res.data.uid);
 				

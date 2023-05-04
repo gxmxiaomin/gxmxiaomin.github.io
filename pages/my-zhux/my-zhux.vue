@@ -29,21 +29,27 @@
 			return {
 				phone: '',
 				code: '',
+				fang:false
 			};
 		},
 		onLoad() {
+		    this.fang = false
 			let lis = uni.getStorageSync('userInfo')
 			console.log(lis, '555')
 			this.phone = lis.phoneNum
 		},
 		methods: {
 			async getCode() {
+				if(this.fang === true){
+					return this.$toast("请勿重复发送验证码");
+				}
 				const res = await this.http.post('/app/user/getCode', {
 					phone: this.phone
 				})
 				if (res.code == 200) {
 					this.$toast("验证码发送成功");
 					this.$refs.buttonCode.start();
+					this.fang = true
 				} else {
 					this.$toast(res.msg);
 				}
