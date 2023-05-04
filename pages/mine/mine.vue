@@ -182,7 +182,7 @@
 		</view>
 
 
-		<view class="view-module" v-if="true">
+		<view class="view-module" v-if="false">
 			<text class="text-title">加入我们</text>
 			<view class="view-grid">
 				<view class="view-item" @click="merchants">

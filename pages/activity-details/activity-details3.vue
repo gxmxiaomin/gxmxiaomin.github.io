@@ -126,19 +126,19 @@
 				<view class="apply-item-title" >
 					<text>地&emsp;&emsp;址</text>
 				</view>
-				<view class="" style="width: 230px;height: 70rpx;background-color:#f6f6f6 ;display: flex;flex-direction: column;" @click="GoMap">
-					<view style="display: flex;flex-direction: row;margin-top: 10px;">
+				<!-- <view class="" style="width: 230px;height: 70rpx;background-color:#f6f6f6 ;display: flex;flex-direction: column;" @click="GoMap"> -->
+				<view class="" style="width: 230px;height: 70rpx;background-color:#f6f6f6 ;display: flex;flex-direction: column;">
+					<!-- <view style="display: flex;flex-direction: row;margin-top: 10px;">
 						<text style="font-size: 15px;width: 200px; overflow: hidden;white-space: nowrap; text-overflow: ellipsis;">{{form.address }}</text>
 						<u-icon name="map-fill" style="margin-left: auto;margin-right: 5rpx;"></u-icon>
-					</view>
+					</view> -->
 					
-					<!-- <u--input
+					<u--input
 						v-model="form.address"
 						style="background-color: #f6f6f6;width: 230px;"
-					    placeholder="点击定位地址"
+					    placeholder="请输入地址"
 					    border="surround"
-						suffixIcon="map-fill"
-					  ></u--input> -->
+					  ></u--input>
 				</view>
 			</view>
 			<!-- 报名按钮 -->
@@ -147,7 +147,7 @@
 					<u-button style="width: 100%;background-color: #f5634c;color: white;" shape="circle" @click="submit" v-if="!info.isEnroll">立即报名</u-button>
 					<u-button style="width: 100%; background-color: #f5634c;" shape="circle" :disabled="true" v-else>已报名</u-button>
 				</view>
-				<view class="" style="width: 15%;margin-left: 10px;">
+				<view class="" style="width: 15%;margin-left: 10px;" v-if="!web">
 					<view class="" style="display: flex;flex-direction: column;">
 						<u-icon @click="share" name="share-square" size="30"></u-icon>
 						<text style="margin-top: -5px;">海报</text>
@@ -156,7 +156,7 @@
 			</view>
 		</view>
 		<view class="" style="width: 100%;height: 10px;"></view>
-		<view v-if="show" class="content-bottom">
+		<view v-if="show && !web" class="content-bottom">
 			<view class="bottom-title">
 				<text>--邀请好友--</text>
 			</view>
@@ -188,7 +188,7 @@
 		</view>
 		<qrcode-poster ref="poster" :title="title" :subTitle="subTitle" :headerImg="headerImg"
 		            :content="content"></qrcode-poster>
-		<view class="" style="margin-top: 200px;">
+		<view class="">
 			<canvas canvas-id="qrcode" v-show="uqrcode" style="width: 150px;margin: 0 auto;"/>
 		</view>
 	</view>
@@ -199,7 +199,7 @@
 	import UQrcode from '../event-details/uqrcode.js'
 	export default{
 	    components:{
-	        QrcodePoster
+	        QrcodePoster,
 	    },
 		data() {
 			return {
@@ -433,11 +433,13 @@
 				}
 			},
 			cancel(){
-				this.scrool = true
+				this.uqrcode = false
 				this.show = false
+				this.scrool = true
 				this.bottom = '20px'
 				this.$refs.UI.$el.style.setProperty('--bottom',this.bottom)
 			},
+			
 			share(){
 				this.show = true
 				this.bottom = '160px'
@@ -491,6 +493,7 @@
 					// uni.navigateTo({
 					// 	url:'/pages/activity-payment/activity-payment'
 					// })
+					// this.form.address = '河南省郑州市金水区'
 					if(this.form.company_name && this.form.contacts && this.form.mobile && this.form.address){
 						this.form.adId = this.activityId
 						console.log(this.form)
@@ -500,13 +503,16 @@
 							if(res.data.createTime.indexOf(' ')!== -1){
 								this.form.createTime = res.data.createTime.split(' ')[0]
 							}
-							if(this.info.adDetailList.length == 0){
+							if(this.info.isCharge == 1){
 								this.form ={
 									company_name:'',//公司名称
 									contacts:'',//负责人
 									mobile:'',//联系电话
 									address:'',//地址
 								}
+								uni.redirectTo({
+									url:'/pages/activityList/activityList'
+								})
 							}else{
 								let info = {
 									img:this.bgImg,
